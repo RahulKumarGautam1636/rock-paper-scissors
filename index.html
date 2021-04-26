@@ -1,0 +1,202 @@
+scissors<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link rel="stylesheet" href="styles.css">
+  <title>Frontend Mentor | Rock, Paper, Scissors</title>
+</head>
+<body>
+  <div class="rules-outer-container">
+  <div class="rules-container">
+    <div class="rules-inner-container">
+      <p>RULES</p>
+      <img src="images/icon-close.svg" alt="close">
+    </div>
+    <img id="rules-image" src="images/image-rules.svg" alt="rules">
+  </div>
+</div>
+  <div class="outer-container">
+    <div class="score-outer-container">
+       <div class="head">
+         <h1>ROCK</h1>
+         <h1 class="paperText">PAPER</h1>
+         <h1>SCISSORS</h1>
+       </div>
+       <div class="score-container">
+         <p>SCORE</p>
+         <h1 id="score">0</h1>
+       </div>
+    </div>
+    <div class="icons-container">
+      <div class="top">
+        <div class="circle paper">
+          <div class="internal-circle">
+            <img src="images/icon-paper.svg" alt="paper">
+          </div>
+        </div>
+        <div class="line"></div>
+        <div id="left-line" class="line"></div>
+        <div id="right-line" class="line"></div>
+        <div class="circle scissors">
+          <div class="internal-circle">
+            <img src="images/icon-scissors.svg" alt="scissors">
+          </div>
+        </div>
+      </div>
+      <div class="bottom">
+        <div class="circle rock">
+          <div class="internal-circle">
+            <img src="images/icon-rock.svg" alt="rock">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="picked-container">
+      <div class="left-container">
+        <h2>YOU PICKED</h2>
+        <div id="randomChoosen" class="circle">
+          <div id="randomChoosenCircle" class="internal-circle">
+            <img id="randomChoosenIMG" src="#" alt="">
+          </div>
+        </div>
+      </div>
+      <div class="middle-container">
+        <h1 id="lose" class="resultText">YOU LOSE</h1>
+        <!-- <h1 id="win" class="resultText">YOU WIN</h1> -->
+        <!-- window.location.reload(); -->
+        <button class="play-again" type="button" name="button" onClick="playAgain();">PLAY AGAIN</button>
+      </div>
+      <div class="right-container">
+
+      <h2>THE HOUSE PICKED</h2>
+      <div id="picked" class="circle">
+        <div id="empty" class="empty-circle">
+          <img id="picked_image" src="#" alt="">
+        </div>
+      </div>
+      <!-- <div id="rock" class="circle">
+        <div class="internal-circle">
+          <img src="images/icon-rock.svg" alt="scissors">
+        </div>
+      </div> -->
+    </div>
+    </div>
+  </div>
+
+
+<script>
+  var list = ["rock", "paper", "scissors","rock", "paper", "scissors","rock", "paper", "scissors"];
+  var currentScore = 0;
+  var paper = $(".paper");
+  var scissors = $(".scissors");
+  var rock = $(".rock");
+  var icons = $(".icons-container");
+  var picked = $(".picked-container");
+  var empty = $("#empty");
+  var pick = $("#picked");
+  var picked_image = $("#picked_image");
+  var win = $("#win");
+  var lose = $("#lose");
+  var randomChoosen = $("#randomChoosen");
+  var randomChoosenIMG = $("#randomChoosenIMG");
+  var randomChoosenCircle = $("#randomChoosenCircle");
+  var score = $("#score");
+  rock.click(function() {
+    user_picked = "rock";
+    // console.log(user_picked);
+    updateRandomChoosen()
+    updateUserPicked();
+  })
+  paper.click(function() {
+    user_picked = "paper";
+    // console.log(user_picked);
+    updateRandomChoosen()
+    updateUserPicked();
+  })
+  scissors.click(function() {
+    user_picked = "scissors";
+    // console.log(user_picked);
+    updateRandomChoosen();
+    updateUserPicked();
+  })
+  function updateUserPicked() {
+    choosen = list[Math.floor(Math.random()*9)];
+    console.log("device "+choosen);
+    console.log("user +"+user_picked);
+    icons.css("display", "none");
+    picked.css("display", "flex");
+    if (choosen===user_picked) {
+      lose.text("IT'S A TIE");
+    } else {
+      if (choosen==="rock" && user_picked==="scissors" ||
+          choosen==="scissors" && user_picked==="paper" ||
+          choosen==="paper" && user_picked==="rock" ) {
+        lose.text("YOU LOSE");
+        pick.addClass("circles");
+        empty.addClass("house_picked");
+        currentScore=0;
+        score.text(currentScore);
+      } else {
+        lose.text("YOU WIN");
+        randomChoosen.addClass("circles");
+        randomChoosenCircle.addClass("house_picked");
+        currentScore++;
+        score.text(currentScore);
+      }
+    }
+
+    pick.addClass(choosen);
+    empty.removeClass("empty-circle");
+
+    empty.addClass("internal-circle");
+    picked_image.attr("src", "images/icon-"+choosen+".svg");
+  }
+  function updateRandomChoosen() {
+    randomChoosen.addClass(user_picked);
+    randomChoosenIMG.attr("src", "images/icon-"+user_picked+".svg");
+  }
+  function playAgain() {
+    icons.css("display", "block");
+    picked.css("display", "none");
+    lose.text("");
+    if (choosen===user_picked) {
+      lose.text("");
+    } else {
+      if (choosen==="rock" && user_picked==="scissors" ||
+          choosen==="scissors" && user_picked==="paper" ||
+          choosen==="paper" && user_picked==="rock" ) {
+        lose.text("");
+        pick.removeClass("circles");
+        empty.removeClass("house_picked");
+      } else {
+        lose.text("");
+        randomChoosen.removeClass("circles");
+        randomChoosenCircle.removeClass("house_picked");
+      }
+    }
+        randomChoosen.removeClass(user_picked);
+        randomChoosenIMG.attr("src", "#");
+
+        pick.removeClass(choosen);
+        empty.addClass("empty-circle");
+
+        empty.removeClass("internal-circle");
+        picked_image.attr("src", "#");
+    }
+
+</script>
+</body>
+</html>
+
+
+<!-- <div class="attribution">
+Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
+Coded by <a href="#">Your Name Here</a>.
+</div> -->
