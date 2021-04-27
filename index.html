@@ -93,6 +93,7 @@ scissors<!DOCTYPE html>
 
 <script>
   var list = ["rock", "paper", "scissors","rock", "paper", "scissors","rock", "paper", "scissors"];
+  // var list = ["paper", "paper", "paper", "paper", "paper", "paper", "paper", "paper", "paper"];
   var currentScore = 0;
   var paper = $(".paper");
   var scissors = $(".scissors");
@@ -137,6 +138,7 @@ scissors<!DOCTYPE html>
     icons.css("display", "none");
     picked.css("opacity", "1");
     picked.css("width", "40rem");
+
     setTimeout(function() {
       middleContainer.css("opacity", "1");
       if (choosen===user_picked) {
@@ -157,6 +159,10 @@ scissors<!DOCTYPE html>
           currentScore++;
           score.text(currentScore);
         }
+        rightContainer.css("transform", "translateX(-5rem)");
+        setTimeout(function() {rightContainer.css("transform", "translateX(0)");},300);
+        leftContainer.css("transform", "translateX(5rem)");
+        setTimeout(function() {leftContainer.css("transform", "translateX(0)");},300);
       }
       pick.addClass(choosen);
       empty.removeClass("empty-circle");
