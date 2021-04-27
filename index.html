@@ -59,13 +59,12 @@ scissors<!DOCTYPE html>
     </div>
 
 
-    <div class="rpsbuttonContainer">
-      <button id="rps" type="button" name="button">RPS</button>
-    </div>
-    <div class="rulesbuttonContainer">
-      <button id="rules" type="button" name="button" onclick="getRules()">RULES</button>
-    </div>
+
   </div>
+
+
+  <div class="picked-outer-container">
+
   <div class="picked-container">
     <div class="left-container">
       <h2>YOU PICKED</h2>
@@ -82,19 +81,25 @@ scissors<!DOCTYPE html>
       <button class="play-again" type="button" name="button" onClick="playAgain();">PLAY AGAIN</button>
     </div>
     <div class="right-container">
-
     <h2>THE HOUSE PICKED</h2>
     <div id="picked" class="circle">
       <div id="empty" class="empty-circle">
         <img id="picked_image" src="#" alt="">
       </div>
     </div>
+  </div>
     <!-- <div id="rock" class="circle">
       <div class="internal-circle">
         <img src="images/icon-rock.svg" alt="scissors">
       </div>
     </div> -->
   </div>
+  </div>
+  <div class="rpsbuttonContainer">
+    <button id="rps" type="button" name="button">RPS</button>
+  </div>
+  <div class="rulesbuttonContainer">
+    <button id="rules" type="button" name="button" onclick="getRules()">RULES</button>
   </div>
 
 
@@ -228,7 +233,7 @@ scissors<!DOCTYPE html>
     }
 
     function getRules() {
-      rulesOuterContainer.css("height", "48rem");
+      rulesOuterContainer.css("height", "60rem");
       rulesOuterContainer.css("opacity", "1");
     }
     function hideRules() {
