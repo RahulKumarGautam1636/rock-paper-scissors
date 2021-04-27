@@ -1,225 +1,275 @@
-scissors<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-  <link rel="stylesheet" href="styles.css">
-  <title>Frontend Mentor | Rock, Paper, Scissors</title>
-</head>
-<body>
-  <div class="rules-outer-container">
-  <div class="rules-container">
-    <div class="rules-inner-container">
-      <p>RULES</p>
-      <img src="images/icon-close.svg" alt="close">
-    </div>
-    <img id="rules-image" src="images/image-rules.svg" alt="rules">
-  </div>
-</div>
-  <div class="outer-container">
-    <div class="score-outer-container">
-       <div class="head">
-         <h1>ROCK</h1>
-         <h1 class="paperText">PAPER</h1>
-         <h1>SCISSORS</h1>
-       </div>
-       <div class="score-container">
-         <p>SCORE</p>
-         <h1 id="score">0</h1>
-       </div>
-    </div>
-    <div class="icons-container">
-      <div class="top">
-        <div class="circle paper">
-          <div class="internal-circle">
-            <img src="images/icon-paper.svg" alt="paper">
-          </div>
-        </div>
-        <div class="line"></div>
-        <div id="left-line" class="line"></div>
-        <div id="right-line" class="line"></div>
-        <div class="circle scissors">
-          <div class="internal-circle">
-            <img src="images/icon-scissors.svg" alt="scissors">
-          </div>
-        </div>
-      </div>
-      <div class="bottom">
-        <div class="circle rock">
-          <div class="internal-circle">
-            <img src="images/icon-rock.svg" alt="rock">
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="picked-container">
-      <div class="left-container">
-        <h2>YOU PICKED</h2>
-        <div id="userPicked" class="circle">
-          <div id="userPickedCircle" class="internal-circle">
-            <img id="userPickedIMG" src="#" alt="">
-          </div>
-        </div>
-      </div>
-      <div class="middle-container">
-        <h1 id="lose" class="resultText">YOU LOSE</h1>
-        <!-- <h1 id="win" class="resultText">YOU WIN</h1> -->
-        <!-- window.location.reload(); -->
-        <button class="play-again" type="button" name="button" onClick="playAgain();">PLAY AGAIN</button>
-      </div>
-      <div class="right-container">
-
-      <h2>THE HOUSE PICKED</h2>
-      <div id="picked" class="circle">
-        <div id="empty" class="empty-circle">
-          <img id="picked_image" src="#" alt="">
-        </div>
-      </div>
-      <!-- <div id="rock" class="circle">
-        <div class="internal-circle">
-          <img src="images/icon-rock.svg" alt="scissors">
-        </div>
-      </div> -->
-    </div>
-    </div>
-  </div>
-
-
-<script>
-  var list = ["rock", "paper", "scissors","rock", "paper", "scissors","rock", "paper", "scissors"];
-  // var list = ["paper", "paper", "paper", "paper", "paper", "paper", "paper", "paper", "paper"];
-  var currentScore = 0;
-  var paper = $(".paper");
-  var scissors = $(".scissors");
-  var rock = $(".rock");
-  var icons = $(".icons-container");
-  var picked = $(".picked-container");
-  var empty = $("#empty");
-  var pick = $("#picked");
-  var picked_image = $("#picked_image");
-  var win = $("#win");
-  var lose = $("#lose");
-  var userPicked = $("#userPicked");
-  var userPickedIMG = $("#userPickedIMG");
-  var userPickedCircle = $("#userPickedCircle");
-  var middleContainer = $(".middle-container");
-  var leftContainer = $(".left-container");
-  var rightContainer = $(".right-container");
-  var score = $("#score");
-  rock.click(function() {
-    user_picked = "rock";
-    icons.css("opacity", "0");
-    setTimeout(function() {
-      updateUserPicked();
-      updateRandomChoosen()
-    },750);
-    // setTimeout(function() {updateRandomChoosen()},1500);
-  })
-  paper.click(function() {
-    user_picked = "paper";
-    icons.css("opacity", "0");
-    setTimeout(function() {updateRandomChoosen();updateUserPicked()},750);
-  })
-  scissors.click(function() {
-    user_picked = "scissors";
-    icons.css("opacity", "0");
-    setTimeout(function() {updateRandomChoosen();updateUserPicked()},750);
-  })
-  function updateRandomChoosen() {
-    choosen = list[Math.floor(Math.random()*9)];
-    console.log("device "+choosen);
-    console.log("user +"+user_picked);
-    icons.css("display", "none");
-    picked.css("opacity", "1");
-    picked.css("width", "40rem");
-
-    setTimeout(function() {
-      middleContainer.css("opacity", "1");
-      if (choosen===user_picked) {
-        lose.text("IT'S A TIE");
-      } else {
-        if (choosen==="rock" && user_picked==="scissors" ||
-            choosen==="scissors" && user_picked==="paper" ||
-            choosen==="paper" && user_picked==="rock" ) {
-          lose.text("YOU LOSE");
-          pick.addClass("circles");
-          empty.addClass("house_picked");
-          currentScore=0;
-          score.text(currentScore);
-        } else {
-          lose.text("YOU WIN");
-          userPicked.addClass("circles");
-          userPickedCircle.addClass("house_picked");
-          currentScore++;
-          score.text(currentScore);
-        }
-        rightContainer.css("transform", "translateX(-5rem)");
-        setTimeout(function() {rightContainer.css("transform", "translateX(0)");},300);
-        leftContainer.css("transform", "translateX(5rem)");
-        setTimeout(function() {leftContainer.css("transform", "translateX(0)");},300);
-      }
-      pick.addClass(choosen);
-      empty.removeClass("empty-circle");
-
-      empty.addClass("internal-circle");
-      picked_image.attr("src", "images/icon-"+choosen+".svg");
-    },1000)
-
-    // pick.addClass(choosen);
-    // empty.removeClass("empty-circle");
-    //
-    // empty.addClass("internal-circle");
-    // picked_image.attr("src", "images/icon-"+choosen+".svg");
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
   }
-  function updateUserPicked() {
-    userPicked.addClass(user_picked);
-    userPickedIMG.attr("src", "images/icon-"+user_picked+".svg");
+  body {
+    font-family: 'Barlow Semi Condensed', sans-serif;
   }
-  function playAgain() {
-    icons.css("display", "block");
-    picked.css("width", "10rem");
-    picked.css("opacity", "0");
-    lose.text("");
-    if (choosen===user_picked) {
-      lose.text("");
-    } else {
-      if (choosen==="rock" && user_picked==="scissors" ||
-          choosen==="scissors" && user_picked==="paper" ||
-          choosen==="paper" && user_picked==="rock" ) {
-        lose.text("");
-        pick.removeClass("circles");
-        empty.removeClass("house_picked");
-      } else {
-        lose.text("");
-        userPicked.removeClass("circles");
-        userPickedCircle.removeClass("house_picked");
-      }
+  .outer-container {
+    height: 100vh;
+    width: 100%;
+    background-image: radial-gradient( circle at top, hsl(214, 47%, 23%), hsl(237, 49%, 15%));
+  }
+  .score-outer-container {
+    min-width: 30rem;
+    width: 50%;
+    height: 7.8rem;
+    border: 3px solid hsl(217, 16%, 45%);
+    margin: auto;
+    transform: translateY(3rem);
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1.5rem 0 1.5rem;
+  }
+  /* .score-outer-container * {border: 1px solid red;} */
+  .head {
+    height: 80%;
+    width: 35%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .head h1 {
+    color: white;
+    letter-spacing: 1px;
+  }
+  .paperText {
+    margin: -0.8rem 0 -0.8rem 0;
+  }
+  .score-container {
+    height: 68%;
+    width: 7rem;
+    border-radius: 5px;
+    background: white;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+  }
+  .score-container h1, p {
+    color: hsl(229, 25%, 31%);
+  }
+  .icons-container {
+    height: 25rem;
+    width: 30rem;
+    margin: auto;
+    margin-top: 5rem;
+    transition: 0.5s linear;
+  }
+  .top {
+    height: 50%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  .bottom {
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .paper {
+    background-image: linear-gradient(hsl(230, 89%, 62%), hsl(230, 89%, 65%));
+    border-bottom: 0.3rem solid hsl(229, 64%, 46%);
+  }
+  .scissors {
+    background-image: linear-gradient(hsl(39, 89%, 49%), hsl(40, 84%, 53%));
+    border-bottom: 0.3rem solid hsl(30, 89%, 49%);
+  }
+  .rock {
+    background-image: linear-gradient(hsl(349, 71%, 52%), hsl(349, 70%, 56%));
+    border-bottom: 0.3rem solid hsl(349, 90%, 52%);
+  }
+  .internal-circle {
+    height: 7rem;
+    width: 7rem;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    border-top: 0.4rem solid #c4ccc4;
+  }
+  .circle {
+    position: relative;
+    height: 9rem;
+    width: 9rem;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+  }
+  .line {
+    height: 1rem;
+    width: 15rem;
+    position: absolute;
+    background: hsl(237, 49%, 15%);
+    /* margin: 0 -7rem 0 -7rem; */
+  }
+  #left-line {
+    transform: rotate(59deg) translateX(3.5rem) translateY(6.5rem);
+  }
+  #right-line {
+    transform: rotate(-59deg) translateX(-3.5rem) translateY(6.5rem);
+  }
+  .rules-outer-container {
+    position: absolute;
+    width: 100%;
+    height: 48rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0,0,0, 0.5);
+    display: none;
+  }
+  .rules-container {
+    /* position: absolute; */
+    height: 25.5rem;
+    width: 24.3rem;
+    padding: 1.8rem 2rem 0 2rem;
+    z-index: 3;
+    background: white;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  .rules-container p {
+    font-size: 1.7rem;
+    font-weight: bold;
+    /* margin-left: -0.9rem; */
+  }
+  #rules-image {
+    margin-top: 3.5rem;
+    width: 18rem;
+  }
+  .rules-inner-container {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .picked-container {
+    /* border: 1px solid red; */
+    /* position: absolute; */
+    height: 20rem;
+    width: 10rem;
+    display: flex;
+    justify-content: space-evenly;
+    /* flex-direction: column; */
+    margin: auto;
+    margin-top: 5rem;
+    /* display: none; */
+    opacity: 0;
+    transition: width 0.5s ease-in-out;
+    /* border: 1px solid red; */
+    /* z-index: 3; */
+  }
+  .left-container, .right-container, .middle-container {
+    width: 33.33%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    transition: 0.5s ease-in-out;
+    text-align: center;
+  }
+  .left-container h2,
+  .right-container h2 {
+    width: 13rem;
+  }
+  .middle-container {
+    justify-content: center;
+    opacity: 0;
+  }
+  .play-again {
+    height: 2rem;
+    width: 8rem;
+    margin: 1rem 0 -3rem 0;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    color: red;
+    font-family: 'Barlow Semi Condensed', sans-serif;
+  }
+  .resultText {
+    color: white;
+    /* display: none; */
+  }
+  .picked-container h2 {
+    color: white;
+    font-size: 1.2rem;
+    word-spacing: 2px;
+    letter-spacing: 1px;
+    font-weight: lighter;
+  }
+  .empty-circle {
+    position: relative;
+    background: #142540;
+    height: 7rem;
+    width: 7rem;
+    border-radius: 50%;
+  }
+  .house_picked::after {
+    content: '';
+    height: 17.5rem;
+    width: 17.5rem;
+    position: absolute;
+    bottom: 50%;
+    right: 50%;
+    z-index: 1;
+    transform: translate(50%, 50%);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.02);
+    transition: 0.4s linear;
+  }
+  .house_picked::before {
+    content: '';
+    height: 22rem;
+    width: 22rem;
+    position: absolute;
+    bottom: 50%;
+    right: 50%;
+    z-index: 1;
+    transform: translate(50%, 50%);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.02);
+    transition: 0.4s linear;
+  }
+  .circles {
+    position: relative;
+  }
+  .circles::before {
+    content: '';
+    height: 13rem;
+    width: 13rem;
+    position: absolute;
+    bottom: 50%;
+    right: 50%;
+    z-index: 1;
+    transform: translate(50%, 50%);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.02);
+    transition: 0.4s linear;
+  }
+
+  @media only screen and (max-width: 420px) {
+    html {
+      font-size: 65%;
     }
-        userPicked.removeClass(user_picked);
-        userPickedIMG.attr("src", "#");
-
-        pick.removeClass(choosen);
-        empty.addClass("empty-circle");
-
-        empty.removeClass("internal-circle");
-        picked_image.attr("src", "#");
-        icons.css("opacity", "1");
-
-        middleContainer.css("opacity", "0");
+    .picked-container {
+      width: 100%;
+      height: 30rem;
+      overflow: hidden;
     }
-
-</script>
-</body>
-</html>
-
-
-<!-- <div class="attribution">
-Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
-Coded by <a href="#">Your Name Here</a>.
-</div> -->
+  }
+  @media only screen and (max-width: 360px) {
+    html {
+      font-size: 55%;
+    }
+  }
