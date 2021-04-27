@@ -7,7 +7,7 @@
     font-family: 'Barlow Semi Condensed', sans-serif;
   }
   .outer-container {
-    height: 80rem;
+    height: 100vh;
     width: 100%;
     background-image: radial-gradient( circle at top, hsl(214, 47%, 23%), hsl(237, 49%, 15%));
   }
@@ -56,11 +56,9 @@
   .icons-container {
     height: 25rem;
     width: 30rem;
-    /* border: 1px solid red; */
     margin: auto;
     margin-top: 5rem;
-    /* transform: rotate(45deg); */
-    /* display: none; */
+    transition: 0.5s linear;
   }
   .top {
     height: 50%;
@@ -158,14 +156,19 @@
   }
   .picked-container {
     /* border: 1px solid red; */
+    /* position: absolute; */
     height: 20rem;
-    width: 40rem;
+    width: 10rem;
     display: flex;
     justify-content: space-evenly;
     /* flex-direction: column; */
     margin: auto;
     margin-top: 5rem;
-    display: none;
+    /* display: none; */
+    opacity: 0;
+    transition: width 0.5s ease-in-out;
+    /* border: 1px solid red; */
+    /* z-index: 3; */
   }
   .left-container, .right-container, .middle-container {
     width: 33.33%;
@@ -174,9 +177,15 @@
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
+    /* transition: 2s linear; */
+  }
+  .left-container,
+  .right-container h2 {
+    width: 15rem;
   }
   .middle-container {
     justify-content: center;
+    opacity: 0;
   }
   .play-again {
     height: 2rem;
@@ -248,7 +257,7 @@
 
   @media only screen and (max-width: 420px) {
     html {
-      font-size: 70%;
+      font-size: 65%;
     }
     .picked-container {
       width: 100%;
@@ -258,6 +267,6 @@
   }
   @media only screen and (max-width: 360px) {
     html {
-      font-size: 60%;
+      font-size: 55%;
     }
   }
