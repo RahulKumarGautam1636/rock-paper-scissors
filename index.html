@@ -61,9 +61,9 @@ scissors<!DOCTYPE html>
     <div class="picked-container">
       <div class="left-container">
         <h2>YOU PICKED</h2>
-        <div id="randomChoosen" class="circle">
-          <div id="randomChoosenCircle" class="internal-circle">
-            <img id="randomChoosenIMG" src="#" alt="">
+        <div id="userPicked" class="circle">
+          <div id="userPickedCircle" class="internal-circle">
+            <img id="userPickedIMG" src="#" alt="">
           </div>
         </div>
       </div>
@@ -104,67 +104,81 @@ scissors<!DOCTYPE html>
   var picked_image = $("#picked_image");
   var win = $("#win");
   var lose = $("#lose");
-  var randomChoosen = $("#randomChoosen");
-  var randomChoosenIMG = $("#randomChoosenIMG");
-  var randomChoosenCircle = $("#randomChoosenCircle");
+  var userPicked = $("#userPicked");
+  var userPickedIMG = $("#userPickedIMG");
+  var userPickedCircle = $("#userPickedCircle");
+  var middleContainer = $(".middle-container");
+  var leftContainer = $(".left-container");
+  var rightContainer = $(".right-container");
   var score = $("#score");
   rock.click(function() {
     user_picked = "rock";
-    // console.log(user_picked);
-    updateRandomChoosen()
-    updateUserPicked();
+    icons.css("opacity", "0");
+    setTimeout(function() {
+      updateUserPicked();
+      updateRandomChoosen()
+    },750);
+    // setTimeout(function() {updateRandomChoosen()},1500);
   })
   paper.click(function() {
     user_picked = "paper";
-    // console.log(user_picked);
-    updateRandomChoosen()
-    updateUserPicked();
+    icons.css("opacity", "0");
+    setTimeout(function() {updateRandomChoosen();updateUserPicked()},750);
   })
   scissors.click(function() {
     user_picked = "scissors";
-    // console.log(user_picked);
-    updateRandomChoosen();
-    updateUserPicked();
+    icons.css("opacity", "0");
+    setTimeout(function() {updateRandomChoosen();updateUserPicked()},750);
   })
-  function updateUserPicked() {
+  function updateRandomChoosen() {
     choosen = list[Math.floor(Math.random()*9)];
     console.log("device "+choosen);
     console.log("user +"+user_picked);
     icons.css("display", "none");
-    picked.css("display", "flex");
-    if (choosen===user_picked) {
-      lose.text("IT'S A TIE");
-    } else {
-      if (choosen==="rock" && user_picked==="scissors" ||
-          choosen==="scissors" && user_picked==="paper" ||
-          choosen==="paper" && user_picked==="rock" ) {
-        lose.text("YOU LOSE");
-        pick.addClass("circles");
-        empty.addClass("house_picked");
-        currentScore=0;
-        score.text(currentScore);
+    picked.css("opacity", "1");
+    picked.css("width", "40rem");
+    setTimeout(function() {
+      middleContainer.css("opacity", "1");
+      if (choosen===user_picked) {
+        lose.text("IT'S A TIE");
       } else {
-        lose.text("YOU WIN");
-        randomChoosen.addClass("circles");
-        randomChoosenCircle.addClass("house_picked");
-        currentScore++;
-        score.text(currentScore);
+        if (choosen==="rock" && user_picked==="scissors" ||
+            choosen==="scissors" && user_picked==="paper" ||
+            choosen==="paper" && user_picked==="rock" ) {
+          lose.text("YOU LOSE");
+          pick.addClass("circles");
+          empty.addClass("house_picked");
+          currentScore=0;
+          score.text(currentScore);
+        } else {
+          lose.text("YOU WIN");
+          userPicked.addClass("circles");
+          userPickedCircle.addClass("house_picked");
+          currentScore++;
+          score.text(currentScore);
+        }
       }
-    }
+      pick.addClass(choosen);
+      empty.removeClass("empty-circle");
 
-    pick.addClass(choosen);
-    empty.removeClass("empty-circle");
+      empty.addClass("internal-circle");
+      picked_image.attr("src", "images/icon-"+choosen+".svg");
+    },1000)
 
-    empty.addClass("internal-circle");
-    picked_image.attr("src", "images/icon-"+choosen+".svg");
+    // pick.addClass(choosen);
+    // empty.removeClass("empty-circle");
+    //
+    // empty.addClass("internal-circle");
+    // picked_image.attr("src", "images/icon-"+choosen+".svg");
   }
-  function updateRandomChoosen() {
-    randomChoosen.addClass(user_picked);
-    randomChoosenIMG.attr("src", "images/icon-"+user_picked+".svg");
+  function updateUserPicked() {
+    userPicked.addClass(user_picked);
+    userPickedIMG.attr("src", "images/icon-"+user_picked+".svg");
   }
   function playAgain() {
     icons.css("display", "block");
-    picked.css("display", "none");
+    picked.css("width", "10rem");
+    picked.css("opacity", "0");
     lose.text("");
     if (choosen===user_picked) {
       lose.text("");
@@ -177,18 +191,21 @@ scissors<!DOCTYPE html>
         empty.removeClass("house_picked");
       } else {
         lose.text("");
-        randomChoosen.removeClass("circles");
-        randomChoosenCircle.removeClass("house_picked");
+        userPicked.removeClass("circles");
+        userPickedCircle.removeClass("house_picked");
       }
     }
-        randomChoosen.removeClass(user_picked);
-        randomChoosenIMG.attr("src", "#");
+        userPicked.removeClass(user_picked);
+        userPickedIMG.attr("src", "#");
 
         pick.removeClass(choosen);
         empty.addClass("empty-circle");
 
         empty.removeClass("internal-circle");
         picked_image.attr("src", "#");
+        icons.css("opacity", "1");
+
+        middleContainer.css("opacity", "0");
     }
 
 </script>
