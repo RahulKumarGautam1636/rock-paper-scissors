@@ -7,7 +7,7 @@
     font-family: 'Barlow Semi Condensed', sans-serif;
   }
   .outer-container {
-    height: 100vh;
+    height: 80rem;
     width: 100%;
     background-image: radial-gradient( circle at top, hsl(214, 47%, 23%), hsl(237, 49%, 15%));
   }
@@ -196,6 +196,7 @@
     border: none;
     color: red;
     font-family: 'Barlow Semi Condensed', sans-serif;
+    z-index: 3;
   }
   .resultText {
     color: white;
