@@ -328,6 +328,11 @@ scissors<!DOCTYPE html>
     }
 
     function getRules() {
+      if (rpslsOn===true) {
+      $("#rules-image").attr("src", "images/image-rules-bonus.svg");
+    } else {
+      $("#rules-image").attr("src", "images/image-rules.svg");
+    } 
       rulesOuterContainer.css("height", "55rem");
       rulesOuterContainer.css("opacity", "1");
     }
