@@ -21,6 +21,8 @@ scissors<!DOCTYPE html>
     <img id="rules-image" src="images/image-rules.svg" alt="rules">
   </div>
 </div>
+
+
   <div class="outer-container">
     <div class="score-outer-container">
        <div class="head">
@@ -35,7 +37,6 @@ scissors<!DOCTYPE html>
     </div>
 
     <div class="icons-outer-container">
-
     <div class="icons-container">
       <div class="top">
         <div class="circle paper">
@@ -65,15 +66,13 @@ scissors<!DOCTYPE html>
     <div class="buttons-inner-container">
 
   <div class="rpsbuttonContainer">
-    <button id="rps" type="button" name="button">RPS</button>
+    <button id="rps" type="button" name="button" onclick="getRPSLS()">RPS</button>
   </div>
   <div class="rulesbuttonContainer">
     <button id="rules" type="button" name="button" onclick="getRules()">RULES</button>
   </div>
 </div>
 </div>
-
-
   </div>
 
 
@@ -110,16 +109,61 @@ scissors<!DOCTYPE html>
   </div>
   </div>
 
+  <div class="rpsls-outer-container">
+    <div class="rpsls-container">
+      <div class="top-container">
+        <div class="circle scissors reduceRadius1">
+          <div class="internal-circle reduceRadius2">
+            <img src="images/icon-scissors.svg" alt="paper">
+          </div>
+        </div>
+      </div>
+      <div id="top-left-line" class="line"></div>
+      <div id="top-right-line" class="line"></div>
+      <div class="middle_container">
+        <div class="circle spock reduceRadius1">
+          <div class="internal-circle reduceRadius2">
+            <img src="images/icon-spock.svg" alt="paper">
+          </div>
+        </div>
+        <div class="circle paper reduceRadius1">
+          <div class="internal-circle reduceRadius2">
+            <img src="images/icon-paper.svg" alt="paper">
+          </div>
+        </div>
+      </div>
+      <div id="bottom-left-line" class="line"></div>
+      <div id="bottom-right-line" class="line"></div>
+      <div class="bottom-container">
+        <div class="circle lizard reduceRadius1">
+          <div class="internal-circle reduceRadius2">
+            <img src="images/icon-lizard.svg" alt="paper">
+          </div>
+        </div>
+        <div class="circle rock reduceRadius1">
+          <div class="internal-circle reduceRadius2">
+            <img src="images/icon-rock.svg" alt="paper">
+          </div>
+        </div>
+        <div id="bottom-straight-line" class="line"></div>
+      </div>
+    </div>
+  </div>
+
+
 
 
 
 <script>
   // var list = ["rock", "paper", "scissors","rock", "paper", "scissors","rock", "paper", "scissors"];
   var list = ["paper", "paper", "paper", "paper", "paper", "paper", "paper", "paper", "paper"];
+  var list2 = ["rock", "paper", "scissors", "spock", "lizard", "rock", "paper", "scissors" , "spock", "lizard"];
   var currentScore = 0;
   var paper = $(".paper");
   var scissors = $(".scissors");
   var rock = $(".rock");
+  var spock = $(".spock");
+  var lizard = $(".lizard");
   var icons = $(".icons-container");
   var picked = $(".picked-container");
   var empty = $("#empty");
@@ -136,26 +180,40 @@ scissors<!DOCTYPE html>
   var rules = $("#rules");
   var rps = $("#rps");
   var rulesOuterContainer = $(".rules-outer-container");
+  var rpslsOuterContainer = $(".rpsls-outer-container");
+
   var score = $("#score");
   rock.click(function() {
     user_picked = "rock";
-    icons.css("opacity", "0");
-    setTimeout(function() {
-      updateUserPicked();
-      updateRandomChoosen()
-    },750);
-    // setTimeout(function() {updateRandomChoosen()},1500);
+    if (rpslsOn===true) {
+      rpslsOuterContainer.css("opacity", "0");
+      setTimeout(function() {updateUserPicked();playRPSLS()},750);
+    } else {
+      icons.css("opacity", "0");
+      setTimeout(function() {updateUserPicked();updateRandomChoosen()},750);
+  }
   })
   paper.click(function() {
     user_picked = "paper";
-    icons.css("opacity", "0");
-    setTimeout(function() {updateRandomChoosen();updateUserPicked()},750);
+    if (rpslsOn===true) {
+      rpslsOuterContainer.css("opacity", "0");
+      setTimeout(function() {updateUserPicked();playRPSLS()},750);
+    } else {
+      icons.css("opacity", "0");
+      setTimeout(function() {updateUserPicked();updateRandomChoosen()},750);
+  }
   })
   scissors.click(function() {
     user_picked = "scissors";
-    icons.css("opacity", "0");
-    setTimeout(function() {updateRandomChoosen();updateUserPicked()},750);
+    if (rpslsOn===true) {
+      rpslsOuterContainer.css("opacity", "0");
+      setTimeout(function() {updateUserPicked(); playRPSLS()},750);
+    } else {
+      icons.css("opacity", "0");
+      setTimeout(function() {updateUserPicked();updateRandomChoosen()},750);
+  }
   })
+
   function updateRandomChoosen() {
     choosen = list[Math.floor(Math.random()*9)];
     console.log("device "+choosen);
@@ -208,10 +266,12 @@ scissors<!DOCTYPE html>
   }
   function playAgain() {
     picked.css("opacity", "0");
+    // console.log(rpslsOn);
     setTimeout(function() {
+    if (rpslsOn===false) {
       icons.css("display", "block");
-
       if (choosen===user_picked) {
+        pick.removeClass(choosen);
         lose.text("");
       } else {
         if (choosen==="rock" && user_picked==="scissors" ||
@@ -226,10 +286,36 @@ scissors<!DOCTYPE html>
           userPickedCircle.removeClass("house_picked");
         }
       }
+    } else {
+      pick.removeClass(choosen2);
+      rpslsOuterContainer.css("opacity", "1");
+      if (choosen2===user_picked) {
+        lose.text("");
+      } else {
+        if (choosen2==="rock" && user_picked==="scissors" ||
+        choosen2==="scissors" && user_picked==="paper" ||
+        choosen2==="paper" && user_picked==="rock" ||
+        choosen2==="rock" && user_picked==="lizard" ||
+        choosen2==="lizard" && user_picked==="spock" ||
+        choosen2==="spock" && user_picked==="scissors" ||
+        choosen2==="scissors" && user_picked==="lizard" ||
+        choosen2==="lizard" && user_picked==="paper" ||
+        choosen2==="paper" && user_picked==="spock" ||
+        choosen2==="spock" && user_picked==="rock" ) {
+          lose.text("");
+          pick.removeClass("circles");
+          empty.removeClass("house_picked");
+        } else {
+          lose.text("");
+          userPicked.removeClass("circles");
+          userPickedCircle.removeClass("house_picked");
+        }
+      }
+    }
       userPicked.removeClass(user_picked);
       userPickedIMG.attr("src", "#");
 
-      pick.removeClass(choosen);
+      // pick.removeClass(choosen);
       empty.addClass("empty-circle");
 
       empty.removeClass("internal-circle");
@@ -238,7 +324,7 @@ scissors<!DOCTYPE html>
     },850);
     picked.css("width", "10rem");
     lose.text("");
-        middleContainer.css("opacity", "0");
+    middleContainer.css("opacity", "0");
     }
 
     function getRules() {
@@ -249,6 +335,91 @@ scissors<!DOCTYPE html>
       rulesOuterContainer.css("height", "0");
       rulesOuterContainer.css("opacity", "0");
     }
+    rpslsOn = false;
+    function getRPSLS() {
+      rpslsOn = !rpslsOn;
+      picked.css("opacity", "0");
+      picked.css("width", "10rem");
+      lose.text("");
+      pick.removeClass("circles");
+      empty.removeClass("house_picked");
+      userPicked.removeClass("circles");
+      userPickedCircle.removeClass("house_picked");
+      middleContainer.css("opacity", "0");
+      if (rpslsOn===true) {
+        console.log(rpslsOn);
+        icons.css("opacity", "0");
+        setTimeout(function() {
+          icons.css("display", "none");
+          rpslsOuterContainer.css("opacity", "1");
+        },750);
+      } else {
+        rpslsOuterContainer.css("opacity", "0");
+        icons.css("opacity", "1");
+        setTimeout(function() {
+          icons.css("display", "block");
+
+        },750);
+      }
+
+    }
+    spock.click(function() {
+      user_picked = "spock";
+      rpslsOuterContainer.css("opacity", "0");
+      setTimeout(function() {updateUserPicked(); playRPSLS()},750);
+    })
+    lizard.click(function() {
+      user_picked = "lizard";
+      rpslsOuterContainer.css("opacity", "0");
+      setTimeout(function() {updateUserPicked(); playRPSLS()},750);
+    })
+    function playRPSLS() {
+      choosen2 = list2[Math.floor(Math.random()*9)];
+      rpslsOuterContainer.css("opacity", "0");
+      picked.css("opacity", "1");
+      picked.css("width", "40rem");
+      setTimeout(function() {
+        middleContainer.css("opacity", "1");
+        if (choosen2===user_picked) {
+          lose.text("IT'S A TIE");
+        } else {
+          if (
+            choosen2==="rock" && user_picked==="scissors" ||
+            choosen2==="scissors" && user_picked==="paper" ||
+            choosen2==="paper" && user_picked==="rock" ||
+            choosen2==="rock" && user_picked==="lizard" ||
+            choosen2==="lizard" && user_picked==="spock" ||
+            choosen2==="spock" && user_picked==="scissors" ||
+            choosen2==="scissors" && user_picked==="lizard" ||
+            choosen2==="lizard" && user_picked==="paper" ||
+            choosen2==="paper" && user_picked==="spock" ||
+            choosen2==="spock" && user_picked==="rock"
+          ) {
+            lose.text("YOU LOSE");
+            pick.addClass("circles");
+            empty.addClass("house_picked");
+            currentScore=0;
+            score.text(currentScore);
+            pick.css("transform", "translateY(-5rem)");
+            setTimeout(function() {pick.css("transform", "translateY(0)");},250);
+          } else {
+            lose.text("YOU WIN");
+            userPicked.addClass("circles");
+            userPickedCircle.addClass("house_picked");
+            currentScore++;
+            score.text(currentScore);
+            userPicked.css("transform", "translateY(-5rem)");
+            setTimeout(function() {userPicked.css("transform", "translateY(0)");},250);
+          }
+        }
+        pick.addClass(choosen2);
+        empty.removeClass("empty-circle");
+
+        empty.addClass("internal-circle");
+        picked_image.attr("src", "images/icon-"+choosen2+".svg");
+      },1000)
+    }
+
 </script>
 </body>
 </html>
