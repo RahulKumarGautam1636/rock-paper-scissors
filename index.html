@@ -26,9 +26,7 @@ scissors<!DOCTYPE html>
   <div class="outer-container">
     <div class="score-outer-container">
        <div class="head">
-         <h1>ROCK</h1>
-         <h1 class="paperText">PAPER</h1>
-         <h1>SCISSORS</h1>
+         <img id="logo" src="images/logo.svg" alt="logo">
        </div>
        <div class="score-container">
          <p>SCORE</p>
@@ -66,7 +64,7 @@ scissors<!DOCTYPE html>
     <div class="buttons-inner-container">
 
   <div class="rpsbuttonContainer">
-    <button id="rps" type="button" name="button" onclick="getRPSLS()">RPS</button>
+    <button id="rps" type="button" name="button" onclick="getRPSLS()">RPSLS</button>
   </div>
   <div class="rulesbuttonContainer">
     <button id="rules" type="button" name="button" onclick="getRules()">RULES</button>
@@ -101,11 +99,6 @@ scissors<!DOCTYPE html>
       </div>
     </div>
   </div>
-    <!-- <div id="rock" class="circle">
-      <div class="internal-circle">
-        <img src="images/icon-rock.svg" alt="scissors">
-      </div>
-    </div> -->
   </div>
   </div>
 
@@ -184,7 +177,8 @@ scissors<!DOCTYPE html>
   var rps = $("#rps");
   var rulesOuterContainer = $(".rules-outer-container");
   var rpslsOuterContainer = $(".rpsls-outer-container");
-
+  var rpsButton = $("#rps");
+  var logo = $("#logo");
   var score = $("#score");
   rock.click(function() {
     user_picked = "rock";
@@ -355,6 +349,8 @@ scissors<!DOCTYPE html>
         setTimeout(function() {
           icons.css("display", "none");
           rpslsOuterContainer.css("opacity", "1");
+          logo.attr("src", "images/logo-bonus.svg");
+          rpsButton.text("RPS");
         },750);
       } else {
         $("#rules-image").attr("src", "images/image-rules.svg");
@@ -365,7 +361,8 @@ scissors<!DOCTYPE html>
         setTimeout(function() {
           icons.css("display", "block");
           rpslsOuterContainer.css("display", "none");
-
+          logo.attr("src", "images/logo.svg");
+          rpsButton.text("RPSLS");
         },750);
       }
       picked_image.attr("src", "#");
