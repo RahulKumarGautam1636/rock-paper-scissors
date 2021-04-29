@@ -119,7 +119,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 4;
+    z-index: 3;
   }
   .line {
     height: 1rem;
@@ -137,21 +137,22 @@
   .rules-outer-container {
     position: absolute;
     width: 100%;
-    height: 0;
     display: flex;
+    height: 0;
     justify-content: center;
     align-items: center;
     background: rgba(0,0,0, 0.5);
-    z-index: 4;
+    z-index: 5;
     opacity: 0;
     transition: 0.8s ease-in-out;
+    pointer-events: none;
   }
   .rules-container {
     /* position: absolute; */
     height: 25.5rem;
     width: 24.3rem;
     padding: 1.8rem 2rem 0 2rem;
-    z-index: 3;
+    /* z-index: 5; */
     background: white;
     border-radius: 6px;
     display: flex;
@@ -201,6 +202,9 @@
     /* transform: translate(50%, 60%); */
     /* margin-top: -5rem; */
   }
+  #user_picked {
+    pointer-events: none;
+  }
   .left-container, .right-container, .middle-container {
     width: 33.33%;
     display: flex;
@@ -226,7 +230,7 @@
     outline: none;
     border: none;
     color: red;
-    z-index: 3;
+    /* z-index: 3; */
     font-family: 'Barlow Semi Condensed', sans-serif;
   }
   .resultText {
@@ -254,7 +258,7 @@
     position: absolute;
     bottom: 50%;
     right: 50%;
-    z-index: 1;
+    /* z-index: 1; */
     transform: translate(50%, 50%);
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.02);
@@ -267,7 +271,7 @@
     position: absolute;
     bottom: 50%;
     right: 50%;
-    z-index: 1;
+    /* z-index: 1; */
     transform: translate(50%, 50%);
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.02);
@@ -285,7 +289,7 @@
     position: absolute;
     bottom: 50%;
     right: 50%;
-    z-index: 1;
+    /* z-index: 1; */
     transform: translate(50%, 50%);
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.02);
@@ -332,7 +336,7 @@
     background: White;
     transition: 0.5s linear;
     border-radius: 8px;
-    z-index: 3;
+    /* z-index: 3; */
   }
   .rpsbuttonContainer:hover, .rulesbuttonContainer:hover {
     width: 128px;
@@ -340,7 +344,7 @@
   .rpsls-outer-container {
     height: 50rem;
     width: 100%;
-    display: flex;
+    display: none;
     flex-direction: column;
     position: absolute;
     top: 0;
@@ -348,6 +352,7 @@
     justify-content: flex-end;
     opacity: 0;
     transition: 0.5s linear;
+    z-index: 4;
   }
   /* .rpsls-outer-container * {border: 1px solid red;} */
   .rpsls-container {
