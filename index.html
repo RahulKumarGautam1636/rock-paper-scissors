@@ -347,6 +347,8 @@ scissors<!DOCTYPE html>
       middleContainer.css("opacity", "0");
       rpslsOuterContainer.css("display", "flex");
       if (rpslsOn===true) {
+        $("#rules-image").attr("src", "images/image-rules-bonus.svg");
+        $("#rules-image").css("margin-top", "0.9rem");
         console.log(rpslsOn);
         icons.css("opacity", "0");
         pick.removeClass(choosen);
@@ -355,6 +357,8 @@ scissors<!DOCTYPE html>
           rpslsOuterContainer.css("opacity", "1");
         },750);
       } else {
+        $("#rules-image").attr("src", "images/image-rules.svg");
+        $("#rules-image").css("margin-top", "2.5rem");
         pick.removeClass(choosen2);
         rpslsOuterContainer.css("opacity", "0");
         icons.css("opacity", "1");
