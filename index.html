@@ -155,6 +155,9 @@ scissors<!DOCTYPE html>
 
 
 <script>
+  var choosen = "";
+  var choosen2 = "";
+  var user_picked = "";
   // var list = ["rock", "paper", "scissors","rock", "paper", "scissors","rock", "paper", "scissors"];
   var list = ["paper", "paper", "paper", "paper", "paper", "paper", "paper", "paper", "paper"];
   var list2 = ["rock", "paper", "scissors", "spock", "lizard", "rock", "paper", "scissors" , "spock", "lizard"];
@@ -216,7 +219,7 @@ scissors<!DOCTYPE html>
 
   function updateRandomChoosen() {
     choosen = list[Math.floor(Math.random()*9)];
-    console.log("device "+choosen);
+    console.log("device "+choosen+ " triple");
     console.log("user +"+user_picked);
     icons.css("display", "none");
     picked.css("opacity", "1");
@@ -252,13 +255,7 @@ scissors<!DOCTYPE html>
 
       empty.addClass("internal-circle");
       picked_image.attr("src", "images/icon-"+choosen+".svg");
-    },1000)
-
-    // pick.addClass(choosen);
-    // empty.removeClass("empty-circle");
-    //
-    // empty.addClass("internal-circle");
-    // picked_image.attr("src", "images/icon-"+choosen+".svg");
+    },1000);
   }
   function updateUserPicked() {
     userPicked.addClass(user_picked);
@@ -266,10 +263,10 @@ scissors<!DOCTYPE html>
   }
   function playAgain() {
     picked.css("opacity", "0");
-    // console.log(rpslsOn);
     setTimeout(function() {
     if (rpslsOn===false) {
       icons.css("display", "block");
+      pick.removeClass(choosen);
       if (choosen===user_picked) {
         pick.removeClass(choosen);
         lose.text("");
@@ -287,8 +284,9 @@ scissors<!DOCTYPE html>
         }
       }
     } else {
+      rpslsOuterContainer.css("display", "flex");
+      setTimeout(function() {rpslsOuterContainer.css("opacity", "1");},100);
       pick.removeClass(choosen2);
-      rpslsOuterContainer.css("opacity", "1");
       if (choosen2===user_picked) {
         lose.text("");
       } else {
@@ -317,7 +315,6 @@ scissors<!DOCTYPE html>
 
       // pick.removeClass(choosen);
       empty.addClass("empty-circle");
-
       empty.removeClass("internal-circle");
       picked_image.attr("src", "#");
       icons.css("opacity", "1");
@@ -328,18 +325,15 @@ scissors<!DOCTYPE html>
     }
 
     function getRules() {
-      if (rpslsOn===true) {
-      $("#rules-image").attr("src", "images/image-rules-bonus.svg");
-    } else {
-      $("#rules-image").attr("src", "images/image-rules.svg");
-    } 
       rulesOuterContainer.css("height", "55rem");
       rulesOuterContainer.css("opacity", "1");
+      rulesOuterContainer.css("pointer-events", "all");
     }
     function hideRules() {
       rulesOuterContainer.css("height", "0");
       rulesOuterContainer.css("opacity", "0");
-    }
+      rulesOuterContainer.css("pointer-events", "none");
+      }
     rpslsOn = false;
     function getRPSLS() {
       rpslsOn = !rpslsOn;
@@ -351,22 +345,29 @@ scissors<!DOCTYPE html>
       userPicked.removeClass("circles");
       userPickedCircle.removeClass("house_picked");
       middleContainer.css("opacity", "0");
+      rpslsOuterContainer.css("display", "flex");
       if (rpslsOn===true) {
         console.log(rpslsOn);
         icons.css("opacity", "0");
+        pick.removeClass(choosen);
         setTimeout(function() {
           icons.css("display", "none");
           rpslsOuterContainer.css("opacity", "1");
         },750);
       } else {
+        pick.removeClass(choosen2);
         rpslsOuterContainer.css("opacity", "0");
         icons.css("opacity", "1");
         setTimeout(function() {
           icons.css("display", "block");
+          rpslsOuterContainer.css("display", "none");
 
         },750);
       }
-
+      picked_image.attr("src", "#");
+      empty.removeClass("internal-circle");
+      empty.addClass("empty-circle");
+      userPicked.removeClass(user_picked);
     }
     spock.click(function() {
       user_picked = "spock";
@@ -380,10 +381,13 @@ scissors<!DOCTYPE html>
     })
     function playRPSLS() {
       choosen2 = list2[Math.floor(Math.random()*9)];
+      console.log("penta");
+      console.log("user_picked2"+ user_picked);
       rpslsOuterContainer.css("opacity", "0");
       picked.css("opacity", "1");
       picked.css("width", "40rem");
       setTimeout(function() {
+        rpslsOuterContainer.css("display", "none");
         middleContainer.css("opacity", "1");
         if (choosen2===user_picked) {
           lose.text("IT'S A TIE");
