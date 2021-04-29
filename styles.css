@@ -316,6 +316,7 @@
     letter-spacing: 2px;
     transition: 0.25s linear;
     font-family: 'Barlow Semi Condensed', sans-serif;
+    outline: none;
   }
   #rules:hover,
   #rps:hover {
