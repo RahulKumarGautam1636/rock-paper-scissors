@@ -450,9 +450,9 @@
       font-size: 4.4rem;
     }
     .play-again {
-      height: 4.2rem;
+      height: 4.3rem;
       width: 19.5rem;
-      font-size: 1.4rem;
+      font-size: 1.3rem;
     }
     .left-container, .right-container {
       flex-direction: column-reverse;
@@ -485,6 +485,6 @@
   }
   @media only screen and (max-width: 370px) {
     html {
-      font-size: 55%;
+      font-size: 63%;
     }
   }
