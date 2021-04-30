@@ -2,9 +2,9 @@
 var choosen = "";
 var choosen2 = "";
 var user_picked = "";
-var list = ["rock", "paper", "scissors","rock", "paper", "scissors","rock", "paper", "scissors"];
+// var list = ["rock", "paper", "scissors","rock", "paper", "scissors","rock", "paper", "scissors"];
+var list = ["paper","paper","paper","paper","paper","paper","paper","paper","paper","paper"];
 var list2 = ["rock", "paper", "scissors", "spock", "lizard", "rock", "paper", "scissors" , "spock", "lizard"];
-var currentScore = 0;
 var paper = $(".paper");
 var scissors = $(".scissors");
 var rock = $(".rock");
@@ -30,7 +30,8 @@ var rpslsOuterContainer = $(".rpsls-outer-container");
 var rpsButton = $("#rps");
 var logo = $("#logo");
 var score = $("#score");
-
+score.text(localStorage.getItem("score"));
+var currentScore = localStorage.getItem("score");
 // ========================Functions to detect user clicks======================
 rock.click(function() {
   user_picked = "rock";
@@ -91,8 +92,9 @@ function updateRandomChoosen() {
         lose.text("YOU LOSE");
         pick.addClass("circles");
         empty.addClass("house_picked");
-        currentScore=0;
-        score.text(currentScore);
+        localStorage.setItem("score", 0);
+        currentScore = 0;
+        score.text(localStorage.getItem("score"));
         pick.css("transform", "translateY(-5rem)");
         setTimeout(function() {pick.css("transform", "translateY(0)");},250);
       } else {
@@ -100,7 +102,8 @@ function updateRandomChoosen() {
         userPicked.addClass("circles");
         userPickedCircle.addClass("house_picked");
         currentScore++;
-        score.text(currentScore);
+        localStorage.setItem("score", currentScore);
+        score.text(localStorage.getItem("score"));
         userPicked.css("transform", "translateY(-5rem)");
         setTimeout(function() {userPicked.css("transform", "translateY(0)");},250);
       }
