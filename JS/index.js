@@ -30,6 +30,8 @@ var rpslsOuterContainer = $(".rpsls-outer-container");
 var rpsButton = $("#rps");
 var logo = $("#logo");
 var score = $("#score");
+
+// ========================Functions to detect user clicks======================
 rock.click(function() {
   user_picked = "rock";
   if (rpslsOn===true) {
@@ -60,7 +62,17 @@ scissors.click(function() {
     setTimeout(function() {updateUserPicked();updateRandomChoosen()},750);
 }
 })
-
+spock.click(function() {
+  user_picked = "spock";
+  rpslsOuterContainer.css("opacity", "0");
+  setTimeout(function() {updateUserPicked(); playRPSLS()},750);
+})
+lizard.click(function() {
+  user_picked = "lizard";
+  rpslsOuterContainer.css("opacity", "0");
+  setTimeout(function() {updateUserPicked(); playRPSLS()},750);
+})
+// ==============function to update Randomly chosen item=====================
 function updateRandomChoosen() {
   choosen = list[Math.floor(Math.random()*9)];
   console.log("device "+choosen+ " triple");
@@ -68,7 +80,6 @@ function updateRandomChoosen() {
   icons.css("display", "none");
   picked.css("opacity", "1");
   picked.css("width", "40rem");
-
   setTimeout(function() {
     middleContainer.css("opacity", "1");
     if (choosen===user_picked) {
@@ -101,10 +112,12 @@ function updateRandomChoosen() {
     picked_image.attr("src", "images/icon-"+choosen+".svg");
   },1000);
 }
+// =================function to update user picked item=========================
 function updateUserPicked() {
   userPicked.addClass(user_picked);
   userPickedIMG.attr("src", "images/icon-"+user_picked+".svg");
 }
+// =======Resets all css to starting value when play again is button pressed====
 function playAgain() {
   picked.css("opacity", "0");
   setTimeout(function() {
@@ -156,8 +169,6 @@ function playAgain() {
   }
     userPicked.removeClass(user_picked);
     userPickedIMG.attr("src", "#");
-
-    // pick.removeClass(choosen);
     empty.addClass("empty-circle");
     empty.removeClass("internal-circle");
     picked_image.attr("src", "#");
@@ -167,17 +178,19 @@ function playAgain() {
   lose.text("");
   middleContainer.css("opacity", "0");
   }
-
+// ===========Show the rules====================================================
   function getRules() {
     rulesOuterContainer.css("height", "55rem");
     rulesOuterContainer.css("opacity", "1");
     rulesOuterContainer.css("pointer-events", "all");
   }
+// ==================hide rules=================================================
   function hideRules() {
     rulesOuterContainer.css("height", "0");
     rulesOuterContainer.css("opacity", "0");
     rulesOuterContainer.css("pointer-events", "none");
     }
+// ===================turns on the RPSLS MODE===================================
   rpslsOn = false;
   function getRPSLS() {
     rpslsOn = !rpslsOn;
@@ -220,16 +233,7 @@ function playAgain() {
     empty.addClass("empty-circle");
     userPicked.removeClass(user_picked);
   }
-  spock.click(function() {
-    user_picked = "spock";
-    rpslsOuterContainer.css("opacity", "0");
-    setTimeout(function() {updateUserPicked(); playRPSLS()},750);
-  })
-  lizard.click(function() {
-    user_picked = "lizard";
-    rpslsOuterContainer.css("opacity", "0");
-    setTimeout(function() {updateUserPicked(); playRPSLS()},750);
-  })
+// ============Render the random choosen item in RPSLS MODE=====================
   function playRPSLS() {
     choosen2 = list2[Math.floor(Math.random()*9)];
     console.log("penta");
@@ -274,8 +278,15 @@ function playAgain() {
       }
       pick.addClass(choosen2);
       empty.removeClass("empty-circle");
-
       empty.addClass("internal-circle");
       picked_image.attr("src", "images/icon-"+choosen2+".svg");
     },1000)
+  }
+// ==============Addtional moving effect========================================
+  function move() {
+    lose.css("opacity", "0");
+    $(".play-again").css("opacity", "0");
+    picked.css("width", "1px");
+    setTimeout(function() {picked.css("width", "40rem");},700);
+    setTimeout(function() {lose.css("opacity", "1"); $(".play-again").css("opacity", "1");},1100)
   }
