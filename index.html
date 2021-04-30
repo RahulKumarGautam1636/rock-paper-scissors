@@ -72,6 +72,10 @@
 </div>
 </div>
   </div>
+<div class="attribution">
+  <p>Challenge by - <span><a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.</span>
+  Coded by - <span><a href="#">Rahul Kumar Gautam</a></span>.</p>
+</div>
 
 
   <div class="picked-outer-container">
@@ -79,7 +83,7 @@
   <div class="picked-container">
     <div class="left-container">
       <h2>YOU PICKED</h2>
-      <div id="userPicked" class="circle">
+      <div id="userPicked" class="circle" onclick="move()">
         <div id="userPickedCircle" class="internal-circle">
           <img id="userPickedIMG" src="#" alt="">
         </div>
@@ -87,13 +91,11 @@
     </div>
     <div class="middle-container">
       <h1 id="lose" class="resultText">YOU LOSE</h1>
-      <!-- <h1 id="win" class="resultText">YOU WIN</h1> -->
-      <!-- window.location.reload(); -->
       <button class="play-again" type="button" name="button" onClick="playAgain();">PLAY AGAIN</button>
     </div>
     <div class="right-container">
     <h2>THE HOUSE PICKED</h2>
-    <div id="picked" class="circle">
+    <div id="picked" class="circle" onclick="move()">
       <div id="empty" class="empty-circle">
         <img id="picked_image" src="#" alt="">
       </div>
@@ -145,8 +147,3 @@
   <script src="JS/index.js" charset="utf-8"></script>
 </body>
 </html>
-
-<!-- <div class="attribution">
-Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
-Coded by <a href="#">Your Name Here</a>.
-</div> -->
