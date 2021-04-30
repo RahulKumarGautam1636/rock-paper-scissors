@@ -177,7 +177,7 @@ function playAgain() {
     picked_image.attr("src", "#");
     icons.css("opacity", "1");
   },850);
-  picked.css("width", "10rem");
+  picked.css("width", "1px");
   lose.text("");
   middleContainer.css("opacity", "0");
   }
@@ -198,7 +198,7 @@ function playAgain() {
   function getRPSLS() {
     rpslsOn = !rpslsOn;
     picked.css("opacity", "0");
-    picked.css("width", "10rem");
+    picked.css("width", "1px");
     lose.text("");
     pick.removeClass("circles");
     empty.removeClass("house_picked");
