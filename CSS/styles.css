@@ -388,6 +388,17 @@
   #bottom-right-line {
     transform: rotate(108deg) translateX(14.5rem) translateY(-21.5rem);
   }
+  .attribution {
+    text-align: center;
+    background: hsl(237, 49%, 15%);
+  }
+  .attribution a {
+    text-decoration: none;
+    color: hsl(39, 89%, 49%);
+  }
+  .attribution p {
+    color: hsl(189, 59%, 53%);
+  }
   @media only screen and (max-width: 620px) {
     html {
       font-size: 75%;
