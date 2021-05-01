@@ -2,8 +2,7 @@
 var choosen = "";
 var choosen2 = "";
 var user_picked = "";
-// var list = ["rock", "paper", "scissors","rock", "paper", "scissors","rock", "paper", "scissors"];
-var list = ["paper","paper","paper","paper","paper","paper","paper","paper","paper","paper"];
+var list = ["rock", "paper", "scissors","rock", "paper", "scissors","rock", "paper", "scissors"];
 var list2 = ["rock", "paper", "scissors", "spock", "lizard", "rock", "paper", "scissors" , "spock", "lizard"];
 var paper = $(".paper");
 var scissors = $(".scissors");
@@ -30,7 +29,13 @@ var rpslsOuterContainer = $(".rpsls-outer-container");
 var rpsButton = $("#rps");
 var logo = $("#logo");
 var score = $("#score");
-score.text(localStorage.getItem("score"));
+
+// =======================Render current score==================================
+if (!localStorage.getItem("score")) {
+  score.text("0");
+} else {
+  score.text(localStorage.getItem("score"));
+}
 var currentScore = localStorage.getItem("score");
 // ========================Functions to detect user clicks======================
 rock.click(function() {
@@ -92,9 +97,9 @@ function updateRandomChoosen() {
         lose.text("YOU LOSE");
         pick.addClass("circles");
         empty.addClass("house_picked");
-        localStorage.setItem("score", 0);
+        localStorage.removeItem("score");
         currentScore = 0;
-        score.text(localStorage.getItem("score"));
+        score.text(currentScore);
         pick.css("transform", "translateY(-5rem)");
         setTimeout(function() {pick.css("transform", "translateY(0)");},250);
       } else {
@@ -103,7 +108,7 @@ function updateRandomChoosen() {
         userPickedCircle.addClass("house_picked");
         currentScore++;
         localStorage.setItem("score", currentScore);
-        score.text(localStorage.getItem("score"));
+        score.text(currentScore);
         userPicked.css("transform", "translateY(-5rem)");
         setTimeout(function() {userPicked.css("transform", "translateY(0)");},250);
       }
@@ -265,7 +270,8 @@ function playAgain() {
           lose.text("YOU LOSE");
           pick.addClass("circles");
           empty.addClass("house_picked");
-          currentScore=0;
+          localStorage.removeItem("score");
+          currentScore = 0;
           score.text(currentScore);
           pick.css("transform", "translateY(-5rem)");
           setTimeout(function() {pick.css("transform", "translateY(0)");},250);
@@ -274,6 +280,7 @@ function playAgain() {
           userPicked.addClass("circles");
           userPickedCircle.addClass("house_picked");
           currentScore++;
+          localStorage.setItem("score", currentScore);
           score.text(currentScore);
           userPicked.css("transform", "translateY(-5rem)");
           setTimeout(function() {userPicked.css("transform", "translateY(0)");},250);
