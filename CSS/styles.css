@@ -63,7 +63,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: 0.5s linear;
+    overflow: hidden;
   }
   .icons-container {
     height: 30.5rem;
@@ -449,7 +449,7 @@
     .left-container, .right-container {
       flex-direction: column-reverse;
       height: 22rem;
-      margin-top: 10rem;
+      margin-top: 9rem;
       width: 49.33%;
     }
     .buttonsContainer {
