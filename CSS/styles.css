@@ -66,7 +66,7 @@
   }
   .icons-container {
     height: 30.5rem;
-    width: 35rem;
+    min-width: 35rem;
     transition: 0.5s linear;
   }
   .top {
@@ -226,7 +226,7 @@
     letter-spacing: 2px;
     font-family: 'Barlow Semi Condensed', sans-serif;
   }
-  .resultText {
+  #lose {
     color: white;
     font-size: 2.4rem;
   }
@@ -398,6 +398,7 @@
   }
   .attribution p {
     color: hsl(189, 59%, 53%);
+    word-spacing: 1px;
   }
   @media only screen and (max-width: 620px) {
     html {
@@ -417,7 +418,8 @@
       font-size: 70%;
     }
     .rules-container {
-      width: 85%;
+      width: 80%;
+      min-width: 30rem;
       height: 56%;
     }
     .picked-outer-container {
@@ -433,7 +435,7 @@
       order: 3;
       justify-content: space-between;
     }
-    .resultText {
+    #lose {
       font-size: 4.4rem;
     }
     .play-again {
@@ -470,8 +472,18 @@
     }
 
   }
-  @media only screen and (max-width: 370px) {
+  @media only screen and (max-width: 380px) {
     html {
       font-size: 63%;
     }
   }
+    @media only screen and (max-width: 320px) {
+      html {
+        font-size: 55%;
+      }
+    }
+      @media only screen and (max-width: 280px) {
+        html {
+          font-size: 45%;
+        }
+      }
