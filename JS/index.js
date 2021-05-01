@@ -40,6 +40,7 @@ var currentScore = localStorage.getItem("score");
 // ========================Functions to detect user clicks======================
 rock.click(function() {
   user_picked = "rock";
+  $(".picked-outer-container").css("display", "flex");
   if (rpslsOn===true) {
     rpslsOuterContainer.css("opacity", "0");
     setTimeout(function() {updateUserPicked();playRPSLS()},750);
@@ -50,6 +51,7 @@ rock.click(function() {
 })
 paper.click(function() {
   user_picked = "paper";
+  $(".picked-outer-container").css("display", "flex");
   if (rpslsOn===true) {
     rpslsOuterContainer.css("opacity", "0");
     setTimeout(function() {updateUserPicked();playRPSLS()},750);
@@ -59,6 +61,7 @@ paper.click(function() {
 }
 })
 scissors.click(function() {
+  $(".picked-outer-container").css("display", "flex");
   user_picked = "scissors";
   if (rpslsOn===true) {
     rpslsOuterContainer.css("opacity", "0");
@@ -69,11 +72,13 @@ scissors.click(function() {
 }
 })
 spock.click(function() {
+  $(".picked-outer-container").css("display", "flex");
   user_picked = "spock";
   rpslsOuterContainer.css("opacity", "0");
   setTimeout(function() {updateUserPicked(); playRPSLS()},750);
 })
 lizard.click(function() {
+  $(".picked-outer-container").css("display", "flex");
   user_picked = "lizard";
   rpslsOuterContainer.css("opacity", "0");
   setTimeout(function() {updateUserPicked(); playRPSLS()},750);
@@ -83,7 +88,7 @@ function updateRandomChoosen() {
   choosen = list[Math.floor(Math.random()*9)];
   console.log("device "+choosen+ " triple");
   console.log("user +"+user_picked);
-  icons.css("display", "none");
+  icons.css("opacity", "0");
   picked.css("opacity", "1");
   picked.css("width", "40rem");
   setTimeout(function() {
@@ -148,6 +153,7 @@ function playAgain() {
         userPickedCircle.removeClass("house_picked");
       }
     }
+    icons.css("opacity", "1");
   } else {
     rpslsOuterContainer.css("display", "flex");
     setTimeout(function() {rpslsOuterContainer.css("opacity", "1");},100);
@@ -180,7 +186,7 @@ function playAgain() {
     empty.addClass("empty-circle");
     empty.removeClass("internal-circle");
     picked_image.attr("src", "#");
-    icons.css("opacity", "1");
+    $(".picked-outer-container").css("display", "none");
   },850);
   picked.css("width", "1px");
   lose.text("");
@@ -215,26 +221,31 @@ function playAgain() {
       $("#rules-image").attr("src", "images/image-rules-bonus.svg");
       $("#rules-image").css("margin-top", "0.9rem");
       console.log(rpslsOn);
+      icons.css("transform", "rotate(120deg)");
       icons.css("opacity", "0");
       pick.removeClass(choosen);
       setTimeout(function() {
-        icons.css("display", "none");
+        $(".rpsls-container").css("transform", "rotate(0deg)");
         rpslsOuterContainer.css("opacity", "1");
         logo.attr("src", "images/logo-bonus.svg");
         rpsButton.text("RPS");
-      },750);
+        $(".picked-outer-container").css("display", "none");
+      },500);
+
     } else {
       $("#rules-image").attr("src", "images/image-rules.svg");
       $("#rules-image").css("margin-top", "2.5rem");
       pick.removeClass(choosen2);
       rpslsOuterContainer.css("opacity", "0");
-      icons.css("opacity", "1");
+      $(".rpsls-container").css("transform", "rotate(-120deg)");
       setTimeout(function() {
-        icons.css("display", "block");
+      icons.css("opacity", "1");
+      icons.css("transform", "rotate(0deg)");
         rpslsOuterContainer.css("display", "none");
         logo.attr("src", "images/logo.svg");
         rpsButton.text("RPSLS");
-      },750);
+        $(".picked-outer-container").css("display", "none");
+      },500);
     }
     picked_image.attr("src", "#");
     empty.removeClass("internal-circle");
